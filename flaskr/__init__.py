@@ -41,6 +41,7 @@ def create_app():
     app.url_map.strict_slashes = False
 
     app.config["SECRET_KEY"] = secrets.token_hex()
+    app.config["APPLICATION_ROOT"] = '/extremestartup'
 
     db_client = get_mongo_client()
 

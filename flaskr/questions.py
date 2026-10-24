@@ -5,7 +5,7 @@ import random
 import yaml
 import os
 
-ALLOW_CHEATING = False
+ALLOW_CHEATING = True
 
 # Basic question object. Questions asked to players are instances of subclasses. Should be treated as abstract class
 class Question:
@@ -39,7 +39,7 @@ class Question:
         if self.answer is None:
             self.result = self.problem
 
-        elif ALLOW_CHEATING and self.answer == "cheat":
+        elif ALLOW_CHEATING and self.answer == "cheat67":
             self.result = "CORRECT"
 
         elif self.answered_correctly():

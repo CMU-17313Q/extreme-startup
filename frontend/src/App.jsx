@@ -14,7 +14,7 @@ import ValidRoute from './utils/routes/ValidRoute'
 
 function App () {
   return (
-    <Router >
+    <Router basename="/extremestartup" >
       <Routes>
         <Route path="/" element={<Home />} />
         <Route element={<ValidRoute />}>

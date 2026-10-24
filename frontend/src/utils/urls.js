@@ -28,7 +28,7 @@ export function gameReviewUrl (gameId) {
 /**
  * URLs for requests
  */
-const API_PREFIX = '/api'
+const API_PREFIX = '/extremestartup/api'
 
 // Management of all games
 export function homeAPI () {

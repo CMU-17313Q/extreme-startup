@@ -7,6 +7,7 @@ import svgr from 'vite-plugin-svgr'
 
 // https://vitejs.dev/config/
 export default defineConfig({
+  base: '/extremestartup/',  
   plugins: [react(), svgr()],
   test: {
     globals: true,
@@ -16,7 +17,7 @@ export default defineConfig({
   server: {
     proxy: {
       '/api': {
-        target: 'http://localhost:5000',
+        target: 'http://appbox.qatar.cmu.edu/extremestartup',
         changeOrigin: true
       }
     }
