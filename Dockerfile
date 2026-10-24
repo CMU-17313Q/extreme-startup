@@ -40,7 +40,7 @@ ENV DB_PASSWORD=$DB_PW
 
 ENV DB_USERNAME=xs-bot
 ENV DB_ADDRESS=cluster0.dvvipyf.mongodb.net
-
+ENV SCRIPT_NAME=/extremestartup
 EXPOSE 5000
 EXPOSE 27017
 EXPOSE 80
