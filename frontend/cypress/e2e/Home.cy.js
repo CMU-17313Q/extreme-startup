@@ -77,21 +77,21 @@ describe('Home page', () => {
   it('joining a game', function () {
     cy.intercept('POST', '/api/' + this.gameId + '/players').as('join-game')
 
-    cy.joinGameAsPlayer(this.gameId, 'walter ', 'https://www.google.com')
+    cy.joinGameAsPlayer(this.gameId, 'walter ', 'https://www.google.com/api')
     cy.get('[data-cy="player-id"]').invoke('text').as('playerId').then(() => {
       // Assert that player name and url is visible
       cy.contains('walter').should('be.visible')
-      cy.contains('https://www.google.com').should('be.visible')
+      cy.contains('https://www.google.com/api').should('be.visible')
 
       cy.contains('Successfully Created Player').should('be.visible')
 
       // Assert that response contains all info we need
       cy.wait('@join-game').then(({ request, response }) => {
-        expect(request.body).to.deep.equal({ name: 'walter', api: 'https://www.google.com' })
+        expect(request.body).to.deep.equal({ name: 'walter', api: 'https://www.google.com/api' })
         expect(response.statusCode).to.equal(200)
         expect(response.body).to.have.property('id')
         expect(response.body).to.have.property('score')
-        expect(response.body.api).to.equal('https://www.google.com')
+        expect(response.body.api).to.equal('https://www.google.com/api')
         expect(response.body.name).to.equal('walter')
         expect(response.body.game_id).to.equal(this.gameId)
       })
@@ -103,7 +103,7 @@ describe('Home page', () => {
   it('joining a game with invalid game id', function () {
     cy.intercept('POST', '/api/' + this.gameId + '/players').as('join-game')
 
-    cy.joinGameAsPlayer('invalid-id', 'walter ', 'https://www.google.com', false)
+    cy.joinGameAsPlayer('invalid-id', 'walter ', 'https://www.google.com/api', false)
 
     // Assert error is shown
     cy.contains('Game id does not exist').should('be.visible')
@@ -128,10 +128,24 @@ describe('Home page', () => {
     cy.url().should('equal', Cypress.env('baseUrl'))
   })
 
+  it('joining a game with url not ending in /api', function () {
+    cy.intercept('POST', '/api/' + this.gameId + '/players').as('join-game')
+
+    cy.joinGameAsPlayer(this.gameId, 'walter', 'https://www.google.com', false)
+
+    // Assert error is shown
+    cy.contains('must end with /api').should('be.visible')
+
+    // Assert join-game request was not sent
+    cy.get('@join-game').should('equal', null)
+
+    cy.url().should('equal', Cypress.env('baseUrl'))
+  })
+
   it('joining a game with empty name', function () {
     cy.intercept('POST', '/api/' + this.gameId + '/players').as('join-game')
 
-    cy.joinGameAsPlayer(this.gameId, ' ', 'https://www.google.com', false)
+    cy.joinGameAsPlayer(this.gameId, ' ', 'https://www.google.com/api', false)
 
     // Assert error is shown
     cy.contains('Your name cannot be empty').should('be.visible')
@@ -144,12 +158,12 @@ describe('Home page', () => {
 
   it('joining a game with non-unique name', function () {
     // Join game with name 'walter'
-    cy.joinGameAsPlayer(this.gameId, 'walter', 'https://www.google.com')
+    cy.joinGameAsPlayer(this.gameId, 'walter', 'https://www.google.com/api')
 
     cy.intercept('POST', '/api/' + this.gameId + '/players').as('join-game')
 
     // Try and join with same name
-    cy.joinGameAsPlayer(this.gameId, 'walter', 'https://www.google.com', false)
+    cy.joinGameAsPlayer(this.gameId, 'walter', 'https://www.google.com/api', false)
 
     // Assert error is shown
     cy.contains('Your name already exists').should('be.visible')
@@ -162,12 +176,12 @@ describe('Home page', () => {
 
   it('joining a game with non-unique url', function () {
     // Join game with a url
-    cy.joinGameAsPlayer(this.gameId, 'walter', 'https://www.google.com')
+    cy.joinGameAsPlayer(this.gameId, 'walter', 'https://www.google.com/api')
 
     cy.intercept('POST', '/api/' + this.gameId + '/players').as('join-game')
 
     // Try and join with the same url
-    cy.joinGameAsPlayer(this.gameId, 'jesse', 'https://www.google.com', false)
+    cy.joinGameAsPlayer(this.gameId, 'jesse', 'https://www.google.com/api', false)
 
     // Assert error is shown
     cy.contains('Your url already exists').should('be.visible')

@@ -5,7 +5,7 @@
       "game_id": "mock_game_id",
       "name": "mock_walter",
       "score": -10,
-      "api": "https://www.savewalterwhite.com",
+      "api": "https://www.savewalterwhite.com/api",
       "streak": "X01X01"
     },
     "player2": {
@@ -13,7 +13,7 @@
       "game_id": "mock_game_id",
       "name": "mock_jesse",
       "score": 420,
-      "api": "https://www.savewalterwhite.com",
+      "api": "https://www.savewalterwhite.com/api",
       "streak": "X01X01"
     },
     "player3": {
@@ -21,7 +21,7 @@
       "game_id": "mock_game_id",
       "name": "mock_jimmy",
       "score": 21,
-      "api": "https://www.savewalterwhite.com",
+      "api": "https://www.savewalterwhite.com/api",
       "streak": "111111"
     }
   }

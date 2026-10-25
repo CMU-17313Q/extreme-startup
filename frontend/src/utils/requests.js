@@ -328,6 +328,12 @@ async function validateData (gameId, data) {
       return false
     }
 
+    // Check url points to the player's /api endpoint
+    if (!data.api.endsWith('/api')) {
+      showErrorNotification('Error creating player', 'Your URL must end with /api!')
+      return false
+    }
+
     // Check api url is unique in a game
     const apis = players.map(player => player.api)
 

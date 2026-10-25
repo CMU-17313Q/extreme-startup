@@ -39,7 +39,7 @@ describe('Game page', () => {
     cy.checkAdminNavMenu()
 
     // Create a player so we can check that nav menu is showing on player page
-    cy.joinGameAsPlayer(this.gameId, 'walter', 'https://www.google.com')
+    cy.joinGameAsPlayer(this.gameId, 'walter', 'https://www.google.com/api')
     cy.get('[data-cy="player-id"]').invoke('text').as('playerId').then(() => {
       cy.visit(Cypress.env('baseUrl') + this.gameId + '/players/' + this.playerId)
       cy.checkAdminNavMenu()
@@ -50,7 +50,7 @@ describe('Game page', () => {
     cy.clearCookies()
 
     // Create a player, then check nav menu on all pages
-    cy.joinGameAsPlayer(this.gameId, 'walter', 'https://www.google.com')
+    cy.joinGameAsPlayer(this.gameId, 'walter', 'https://www.google.com/api')
     cy.get('[data-cy="player-id"]').invoke('text').as('playerId').then(() => {
       cy.visit(Cypress.env('baseUrl') + this.gameId)
       cy.checkPlayerNavMenu()
@@ -89,7 +89,7 @@ describe('Game page', () => {
     cy.clearCookies()
 
     // Create a player, then check nav menu buttons
-    cy.joinGameAsPlayer(this.gameId, 'walter', 'https://www.google.com')
+    cy.joinGameAsPlayer(this.gameId, 'walter', 'https://www.google.com/api')
     cy.get('[data-cy="player-id"]').invoke('text').as('playerId').then(() => {
       cy.visit(Cypress.env('baseUrl') + this.gameId)
 
@@ -115,9 +115,9 @@ describe('Game page', () => {
 
   it('fetchAllPlayers requests are being made and check responses', function () {
     // Create 2 players for the game
-    cy.joinGameAsPlayer(this.gameId, 'walter', 'https://www.google.com')
+    cy.joinGameAsPlayer(this.gameId, 'walter', 'https://www.google.com/api')
     cy.get('[data-cy="player-id"]').invoke('text').as('playerId').then(() => {
-      cy.joinGameAsPlayer(this.gameId, 'jesse', 'https://www.google.co.uk')
+      cy.joinGameAsPlayer(this.gameId, 'jesse', 'https://www.google.co.uk/api')
     })
 
     cy.visit(Cypress.env('baseUrl') + this.gameId)

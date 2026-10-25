@@ -3,7 +3,7 @@
   "game_id": "mock_game_id",
   "name": "mock_walter",
   "score": -420,
-  "api": "https://www.savewalterwhite.com",
+  "api": "https://www.savewalterwhite.com/api",
   "streak": "X01X01",
   "events": [
     {

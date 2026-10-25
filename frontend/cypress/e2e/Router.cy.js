@@ -25,7 +25,7 @@ describe('Game page', () => {
   })
 
   it('shows correct components on correct urls', function () {
-    cy.joinGameAsPlayer(this.gameId, 'walter', 'https://www.google.com')
+    cy.joinGameAsPlayer(this.gameId, 'walter', 'https://www.google.com/api')
     cy.get('[data-cy="player-id"]').invoke('text').as('playerId').then(() => {
       // Home component
       cy.visit(Cypress.env('baseUrl'))
@@ -67,7 +67,7 @@ describe('Game page', () => {
   it('only allows admins to see the admin page', function () {
     cy.clearCookies()
 
-    cy.joinGameAsPlayer(this.gameId, 'walter', 'https://www.savewalterwhite.com')
+    cy.joinGameAsPlayer(this.gameId, 'walter', 'https://www.savewalterwhite.com/api')
 
     // Try to visit admin page
     cy.visit(Cypress.env('baseUrl') + this.gameId + '/admin')

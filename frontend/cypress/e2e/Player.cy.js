@@ -22,14 +22,14 @@ describe('Game page', () => {
 
     // save gameId of created game under alias gameId for tests to use later
     cy.get('[data-cy="game-id"]').invoke('text').as('gameId').then(() => {
-      cy.joinGameAsPlayer(this.gameId, 'walter', 'https://www.google.com')
+      cy.joinGameAsPlayer(this.gameId, 'walter', 'https://www.google.com/api')
       cy.get('[data-cy="player-id"]').invoke('text').as('playerId')
     })
   })
 
   it('all information is displayed correctly on initial render', function () {
     cy.get('[data-cy="game-id"]').should('have.text', this.gameId)
-    cy.get('[data-cy="api"]').should('have.text', 'https://www.google.com')
+    cy.get('[data-cy="api"]').should('have.text', 'https://www.google.com/api')
     cy.get('[data-cy="score"]').should('be.visible')
   })
 
@@ -43,7 +43,7 @@ describe('Game page', () => {
       expect(JSON.parse(response.body)).to.have.property('name').and.to.equal('walter')
       expect(JSON.parse(response.body)).to.have.property('id').and.to.equal(this.playerId)
       expect(JSON.parse(response.body)).to.have.property('game_id').and.to.equal(this.gameId)
-      expect(JSON.parse(response.body)).to.have.property('api').and.to.equal('https://www.google.com')
+      expect(JSON.parse(response.body)).to.have.property('api').and.to.equal('https://www.google.com/api')
       expect(JSON.parse(response.body)).to.have.property('score')
       expect(JSON.parse(response.body)).to.have.property('events').and.to.be.an('array')
     })
@@ -54,7 +54,7 @@ describe('Game page', () => {
       expect(JSON.parse(response.body)).to.have.property('name').and.to.equal('walter')
       expect(JSON.parse(response.body)).to.have.property('id').and.to.equal(this.playerId)
       expect(JSON.parse(response.body)).to.have.property('game_id').and.to.equal(this.gameId)
-      expect(JSON.parse(response.body)).to.have.property('api').and.to.equal('https://www.google.com')
+      expect(JSON.parse(response.body)).to.have.property('api').and.to.equal('https://www.google.com/api')
       expect(JSON.parse(response.body)).to.have.property('score')
       expect(JSON.parse(response.body)).to.have.property('events').and.to.be.an('array')
     })
@@ -69,7 +69,7 @@ describe('Game page', () => {
     cy.get('h1').should('contain', 'mock_walter')
     cy.get('[data-cy="player-id"]').should('have.text', 'mock_id')
     cy.get('[data-cy="game-id"]').should('have.text', 'mock_game_id')
-    cy.get('[data-cy="api"]').should('have.text', 'https://www.savewalterwhite.com')
+    cy.get('[data-cy="api"]').should('have.text', 'https://www.savewalterwhite.com/api')
     cy.get('[data-cy="score"]').should('have.text', '-420')
 
     // Check events table displays info correctly

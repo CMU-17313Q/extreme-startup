@@ -73,7 +73,7 @@ function AddPlayer () {
           <Space h="md" />
           <TextInput value={name} onChange={(e) => setName(e.target.value)} placeholder="Your player name" label="Enter player name:" required data-cy="player-name-input" />
           <Space h="md" />
-          <TextInput value={url} onChange={(e) => setUrl(e.target.value)} placeholder="Your URL (http://...)" label="Enter URL:" required data-cy="url-input" />
+          <TextInput value={url} onChange={(e) => setUrl(e.target.value)} placeholder="Your URL (http://.../api)" label="Enter URL:" required data-cy="url-input" />
           <Space h="md" />
           <Button variant="outline" color="green" type="submit">Join!</Button>
         </form>

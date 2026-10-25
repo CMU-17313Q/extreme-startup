@@ -22,10 +22,10 @@ describe('Game page', () => {
 
     // save gameId of created game under alias gameId for tests to use later
     cy.get('[data-cy="game-id"]').invoke('text').as('gameId').then(() => {
-      cy.joinGameAsPlayer(this.gameId, 'walter', 'https://www.google.com')
+      cy.joinGameAsPlayer(this.gameId, 'walter', 'https://www.google.com/api')
       cy.get('[data-cy="player-id"]').invoke('text').as('playerId')
     }).then(() => {
-      cy.joinGameAsPlayer(this.gameId, 'jesse', 'https://www.google.co.uk')
+      cy.joinGameAsPlayer(this.gameId, 'jesse', 'https://www.google.co.uk/api')
     })
   })
 
@@ -34,9 +34,9 @@ describe('Game page', () => {
 
     // Check correct text is displayed (this also checks that the current player is on the top of the list)
     cy.get('tbody > :nth-child(1) > :nth-child(2)').should('have.text', 'jesse')
-    cy.get('tbody > :nth-child(1) > :nth-child(3)').should('have.text', 'https://www.google.co.uk')
+    cy.get('tbody > :nth-child(1) > :nth-child(3)').should('have.text', 'https://www.google.co.uk/api')
     cy.get('tbody > :nth-child(2) > :nth-child(2)').should('have.text', 'walter')
-    cy.get('tbody > :nth-child(2) > :nth-child(3)').should('have.text', 'https://www.google.com')
+    cy.get('tbody > :nth-child(2) > :nth-child(3)').should('have.text', 'https://www.google.com/api')
 
     // Check withdraw buttons are visible
     cy.get('tbody > :nth-child(1) > :nth-child(4)').should('have.text', 'Withdraw')
@@ -61,7 +61,7 @@ describe('Game page', () => {
       expect(Object.keys(response.body.players)).to.have.length(2)
       expect(response.body.players[this.playerId]).to.have.property('id').and.to.equal(this.playerId)
       expect(response.body.players[this.playerId]).to.have.property('name').and.to.equal('walter')
-      expect(response.body.players[this.playerId]).to.have.property('api').and.to.equal('https://www.google.com')
+      expect(response.body.players[this.playerId]).to.have.property('api').and.to.equal('https://www.google.com/api')
     })
 
     cy.wait('@fetch-players').then(({ request, response }) => {
@@ -139,7 +139,7 @@ describe('Game page', () => {
   it('players can only see their own withdraw button or the withdraw all button', function () {
     cy.clearCookies()
 
-    cy.joinGameAsPlayer(this.gameId, 'jimmy', 'https://www.savewalterwhite.com')
+    cy.joinGameAsPlayer(this.gameId, 'jimmy', 'https://www.savewalterwhite.com/api')
 
     // Visit player page and wait for the players to load
     cy.visit(Cypress.env('baseUrl') + this.gameId + '/players')
